@@ -8,12 +8,14 @@ class Main{
         String str;
         while(sc.hasNext()) {
             str = sc.next().toLowerCase();
-            str = str.replaceAll("[^a-z]", "\n");
-            for (String string: str.split("\n")) {
-                set.add(string);
+            str = str.replaceAll("[^a-z]", " ");
+            for (String string: str.split(" ")) {
+                if(!string.equals(" "))
+                    set.add(string);
             }
         }
         TreeSet sortedSet = new TreeSet<String>(set);
+        sortedSet.remove("");
         Iterator it = sortedSet.iterator();
         while(it.hasNext()) {
             System.out.println(it.next());
