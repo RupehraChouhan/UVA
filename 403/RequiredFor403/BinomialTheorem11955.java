@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main11955 {
+public class BinomialTheorem11955 {
 
     public static void main(String []args) {
         Scanner sc = new Scanner(System.in);

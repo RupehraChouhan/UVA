@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main374 {
+public class ModPow374 {
     public static void main(String []args) {
         Scanner sc = new Scanner(System.in);
         BigInteger b, p,m;

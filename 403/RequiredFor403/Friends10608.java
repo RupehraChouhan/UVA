@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.Scanner;
 
-class Main{
+class Friends10608{
     public static void main(String []args){
         Scanner  sc = new Scanner(System.in);
         int t = sc.nextInt();

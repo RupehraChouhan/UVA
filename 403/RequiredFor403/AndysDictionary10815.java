@@ -1,7 +1,7 @@
 import java.util.*;
 import java.util.Scanner;
 
-class Main{
+class AndysDictionary10815{
     public static void main(String []args){
         Scanner sc = new Scanner(System.in);
         Set<String> set = new HashSet<String>();

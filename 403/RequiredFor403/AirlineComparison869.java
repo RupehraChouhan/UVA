@@ -1,7 +1,7 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Main869 {
+public class AirlineComparison869 {
 
     private static int[][] runMarchallAlgorithm(int[][] matrix) {
         int length = matrix.length;

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Main{
+public class RepeatingDecimals202{
 
     private static void repeatingDecimals(ArrayList<Integer> input) {
         int num = input.get(0);
