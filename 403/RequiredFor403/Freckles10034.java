@@ -3,6 +3,7 @@ import static java.lang.System.*;
 
 public class Freckles10034 {
 
+    //getting the input
     public static void main(String []args) {
         Scanner sc = new Scanner(in);
         ArrayList<ArrayList<Double[]>> allTestCases = new ArrayList<>();
@@ -13,21 +14,21 @@ public class Freckles10034 {
             int v = sc.nextInt();
             allVertices = new ArrayList<>();
             for (int j = 0; j <v ; j++) {
-               vertex = new Double[2];
-               vertex[0] = sc.nextDouble();
-               vertex[1] = sc.nextDouble();
-               allVertices.add(vertex);
+                vertex = new Double[2];
+                vertex[0] = sc.nextDouble();
+                vertex[1] = sc.nextDouble();
+                allVertices.add(vertex);
             }
             allTestCases.add(allVertices);
         }
         for (int i = 0; i <t ; i++) {
-            minimumTotalLenth(allTestCases.get(i));
+            minimumTotalLength(allTestCases.get(i));
             if(i!=t-1)
                 out.println();
         }
     }
 
-    private static void minimumTotalLenth(ArrayList<Double[]> allVertices) {
+    private static void minimumTotalLength(ArrayList<Double[]> allVertices) {
         //Calculate the distance between all the points and store them in a map
         HashMap<Double[][], Double> map = new HashMap<>();
         for(int i=0; i< allVertices.size()-1; i++) {
@@ -39,25 +40,14 @@ public class Freckles10034 {
                 map.put(key, value);
             }
         }
-        map = sortHashMapByValues(map); //Sort the edges in increasing order
-        Double inkRequired=getMinimumLenghtEdges(map);
+        //Sort the edges in increasing order
+        map = sortHashMapByValues(map);
+        Double inkRequired=getMinimumLengthEdges(map);
         out.println(String.format( "%.2f",inkRequired));
     }
 
-    private static Double[][] createKey(Double[] firstCoordinate, Double[] secondCoordinate) {
-        Double[][] key = new Double[2][2];
-        key[0] = firstCoordinate;
-        key[1] = secondCoordinate;
-        return key;
-    }
-
-    private static Double calculateDistanceBetweenTwoPoints(Double[] firstCoordinate, Double[] secondCoordinate) {
-        Double x2MinusX1Square = (secondCoordinate[0]-firstCoordinate[0]) * (secondCoordinate[0]-firstCoordinate[0]);
-        Double y2MinusY1Square = (secondCoordinate[1]-firstCoordinate[1]) * (secondCoordinate[1]-firstCoordinate[1]);
-        return (Math.sqrt(x2MinusX1Square+y2MinusY1Square));
-    }
-
-    private static Double getMinimumLenghtEdges(HashMap<Double[][], Double> map) {
+    //find the minimum edges and join them
+    private static Double getMinimumLengthEdges(HashMap<Double[][], Double> map) {
         Set<Map.Entry<Double[][], Double>> set = map.entrySet();
         Iterator<Map.Entry<Double[][], Double>> it = set.iterator();
         Set<Double[]> vertices = new HashSet<>();
@@ -81,11 +71,11 @@ public class Freckles10034 {
                 vertices.add(coordinate2);
                 edges.add(value);
             } else if(vertices.contains(coordinate1) == false && vertices.contains(coordinate2)==true) {
-                    vertices.add(coordinate1);
-                    ds.makeSet(coordinate1);
-                    ds.union(coordinate2, coordinate1);
-                    vertices.add(coordinate1);
-                    edges.add(value);
+                vertices.add(coordinate1);
+                ds.makeSet(coordinate1);
+                ds.union(coordinate2, coordinate1);
+                vertices.add(coordinate1);
+                edges.add(value);
             } else {
                 if(ds.findSet(coordinate1) != ds.findSet(coordinate2)) {
                     ds.union(coordinate1, coordinate2);
@@ -103,6 +93,19 @@ public class Freckles10034 {
             ink += edge;
         }
         return ink;
+    }
+
+    private static Double[][] createKey(Double[] firstCoordinate, Double[] secondCoordinate) {
+        Double[][] key = new Double[2][2];
+        key[0] = firstCoordinate;
+        key[1] = secondCoordinate;
+        return key;
+    }
+
+    private static Double calculateDistanceBetweenTwoPoints(Double[] firstCoordinate, Double[] secondCoordinate) {
+        Double x2MinusX1Square = (secondCoordinate[0]-firstCoordinate[0]) * (secondCoordinate[0]-firstCoordinate[0]);
+        Double y2MinusY1Square = (secondCoordinate[1]-firstCoordinate[1]) * (secondCoordinate[1]-firstCoordinate[1]);
+        return (Math.sqrt(x2MinusX1Square+y2MinusY1Square));
     }
 
     private static HashMap<Double[][], Double> sortHashMapByValues(HashMap<Double[][], Double> map) {
