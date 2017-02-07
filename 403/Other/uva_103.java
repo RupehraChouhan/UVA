@@ -1,6 +1,38 @@
+/* UVa problem: 103
+ *
+ * Topic: Dynamic Programming
+ *
+ * Level: challenging
+ *
+ * Brief problem description:
+ *
+ *  Given a list of n-dimensional boxes with their dimensions, find the
+ *  longest nesting sequence of boxes. A box can nest in another box
+ *  if all the dimensions of the inner box are strictly less than the
+ *  outer box.
+ *
+ * Solution Summary:
+ *
+ *  This problem is solved by using longest increasing subsequence
+ *  algorithm. The program sorts the dimensions of individual boxes and
+ *  then sorts all the boxes with respect to each other. Then it runs the
+ *  the longest increasing subsequence algorithm.
+ *
+ * Used Resources:
+ *
+ *   ...
+ *
+ * I hereby certify that I have produced the following solution myself
+ * using only the resources listed above in accordance with the CMPUT
+ * 403 collaboration policy.
+ *
+ *
+ * --------------------- Rupehra Chouhan
+ */
+
 import java.util.*;
 
-public class StackingBoxes103 {
+public class uva_103 {
 
     private static void calculateLongestIncreasingSequence(int[][] arr) {
         ArrayList<int[]> list = new ArrayList<>();
@@ -59,6 +91,7 @@ public class StackingBoxes103 {
         for(int i=0; i<arr.length; i++) {  //sort individual boxes
             Arrays.sort(arr[i]);
         }
+        //sort all the boxes
         for(int i=0; i<arr.length-1; i++) {
             int[] arrA = arr[i];
             int[] arrB = arr[i+1];

@@ -1,7 +1,39 @@
+/* UVa problem: 10034
+ *
+ * Topic: Graph
+ *
+ * Level: challenging
+ *
+ * Brief problem description:
+ *
+ *  Connect all the dots on a plane such that the amount of
+ *  ink used can be minimized. After connecting all the dots
+ *  there must be a sequence of connected lines from any
+ *  dot to any other dot.
+ *
+ * Solution Summary:
+ *
+ *   We basically have to make a minimim spanning tree. The program
+ *   starts by calculating the distance between all the points and
+ *   and then sorts them in increading order. It selects the smallest
+ *   edge and adds it the to the solution.
+ *
+ * Used Resources:
+ *
+ *   ...
+ *
+ * I hereby certify that I have produced the following solution myself
+ * using only the resources listed above in accordance with the CMPUT
+ * 403 collaboration policy.
+ *
+ *
+ * --------------------- Rupehra Chouhan
+ */
+
 import java.util.*;
 import static java.lang.System.*;
 
-public class Freckles10034 {
+public class uva_10034 {
 
     //getting the input
     public static void main(String []args) {
@@ -153,14 +185,11 @@ class DisjointSet {
         Node parent1 = findSet(node1);
         Node parent2 = findSet(node2);
 
-        //if they are part of same set do nothing
         if (parent1.data == parent2.data) {
             return false;
         }
 
-        //else whoever's rank is higher becomes parent of other
         if (parent1.rank >= parent2.rank) {
-            //increment rank only if both sets have same rank
             parent1.rank = (parent1.rank == parent2.rank) ? parent1.rank + 1 : parent1.rank;
             parent2.parent = parent1;
         } else {
