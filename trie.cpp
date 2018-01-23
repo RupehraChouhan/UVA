@@ -1,7 +1,5 @@
 /******************************************************************************
-
 Trie Data Structure
-
 *******************************************************************************/
 
 #include <iostream>
@@ -23,19 +21,34 @@ TrieNode insertWord(string word, TrieNode root) {
     TrieNode current = root;
 
     for(int i = 0; i < word.length(); i++) {
-        auto it = current.children.find(word[i]);
         
-        if (it == current.children.end()) { //character is not in the map
+        // auto it = current.children.find(word[i]);
+        
+        if (current.children.find(word[i]) == current.children.end()) { //character is not in the map
             cout << "Char NOT in map" << endl;
             TrieNode node;
+            
+            // if (current.children.empty()) 
+            //     cout << "current.children is empty" << endl;
+            // else
+            //     cout << "current.children is not empty" << endl;
+                
             current.children.insert(pair<char,TrieNode>(word[i], node));
-            it = current.children.find(word[i]);
-            cout << (it == current.children.end() ? "NOT IN" : "IN") << endl;
+            
+            // it = current.children.find(word[i]);
+            cout << (current.children.find(word[i]) == current.children.end() ? "NOT IN" : "IN") << endl;
         }
         else {
             cout << "Char IN map" << endl;
         }
+        cout << "Next" << endl;
+        if (current.children.find(word[i]) == current.children.end())
+            cout << "Char was NOT inserted properly" << endl;
         current = current.children.at(word[i]);
+        for (auto it = current.children.begin(); it != current.children.end(); ++it)
+            cout << it->first << endl;
+        
+        
         
     }
     current.endWord = true;
@@ -44,10 +57,9 @@ TrieNode insertWord(string word, TrieNode root) {
 }
 
 
-int main()
-{
+int main(){
+    
     TrieNode root ;
-    cout << sizeof(root) << endl;
     root = insertWord("abc",root);
 
     cout << "HERE" << endl;
@@ -57,6 +69,4 @@ int main()
 
     return 0;
 }
-
-
 
