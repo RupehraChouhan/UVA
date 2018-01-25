@@ -17,42 +17,27 @@ struct TrieNode {
 };
 
 TrieNode insertWord(string word, TrieNode root) {
-    cout << word << endl;
-    TrieNode current = root;
+    cout << "inserting: " << word << endl;
+    TrieNode  * current = &root;
 
     for(int i = 0; i < word.length(); i++) {
         
-        // auto it = current.children.find(word[i]);
-        
-        if (current.children.find(word[i]) == current.children.end()) { //character is not in the map
-            cout << "Char NOT in map" << endl;
+        if (current->children.find(word[i]) == current->children.end()) { //character is not in the map
+            cout << "Char '" << word[i] << "' NOT in map" << endl;
             TrieNode node;
+            current->children.insert(pair<char,TrieNode>(word[i], node));
             
-            // if (current.children.empty()) 
-            //     cout << "current.children is empty" << endl;
-            // else
-            //     cout << "current.children is not empty" << endl;
-                
-            current.children.insert(pair<char,TrieNode>(word[i], node));
-            
-            // it = current.children.find(word[i]);
-            cout << (current.children.find(word[i]) == current.children.end() ? "NOT IN" : "IN") << endl;
+            cout << (current->children.find(word[i]) == current->children.end() ? "NOT IN" : "IN") << endl;
         }
         else {
-            cout << "Char IN map" << endl;
+            cout << "Char '" << word[i] << "' IN map" << endl;
         }
-        cout << "Next" << endl;
-        if (current.children.find(word[i]) == current.children.end())
-            cout << "Char was NOT inserted properly" << endl;
-        current = current.children.at(word[i]);
-        for (auto it = current.children.begin(); it != current.children.end(); ++it)
-            cout << it->first << endl;
+        current = &current->children.at(word[i]);
         
-        
-        
+        // for (auto it = current.children.begin(); it != current.children.end(); ++it)
+        //     cout << it->first << endl;
     }
-    current.endWord = true;
-    cout << sizeof(root) << endl;
+    current->endWord = true;
     return root;
 }
 
@@ -61,12 +46,20 @@ int main(){
     
     TrieNode root ;
     root = insertWord("abc",root);
-
-    cout << "HERE" << endl;
-    auto it = root.children.find('a');
-            cout << (it == root.children.end() ? "NOT IN" : "IN") << endl;
     root = insertWord("acd", root);
+    root = insertWord("bac", root);
+    root = insertWord("babd", root);
 
     return 0;
 }
 
+
+/*
+NOTES:
+After adding 'abc' when I tried adding 'acd', it kept on saying that 'a' doesn't exist
+even though I had added it earlier. Turns out, I wasn't referencing my current trinode 
+to the root. I made current 'a pointer' to the root and that fixed it. (Remember this
+next time.)
+
+
+*/
