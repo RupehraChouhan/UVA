@@ -4,6 +4,7 @@ Trie Data Structure
 
 #include <iostream>
 #include <map>
+#include <set>
 using namespace std;
 
 struct TrieNode {
@@ -42,13 +43,38 @@ TrieNode insertWord(string word, TrieNode root) {
 }
 
 
+set<string> generateSuffixes(string word) {
+    set<string> uniqueSuffixes;
+    int lenOfSuffix = 1;
+    
+    for(int i = word.length()-1; i>0; i--) {
+        string suffix = word.substr(i,lenOfSuffix++);
+        uniqueSuffixes.insert(suffix);
+    }
+    return uniqueSuffixes;
+}
+
+
 int main(){
     
-    TrieNode root ;
-    root = insertWord("abc",root);
-    root = insertWord("acd", root);
-    root = insertWord("bac", root);
-    root = insertWord("babd", root);
+    TrieNode root;
+    
+    set<string> allSuffixes = generateSuffixes("competitives");
+    for (auto it=allSuffixes.begin(); it!=allSuffixes.end(); ++it) {
+        cout << *it << endl;
+        root = insertWord(*it, root);
+    }
+    
+    
+    // root = insertWord("abc",root);
+    // root = insertWord("acd", root);
+    // root = insertWord("bac", root);
+    // root = insertWord("babd", root);
+    
+    // set<string> allSuffixes = generateSuffixes("rupehra");
+    // for (auto it=allSuffixes.begin(); it!=allSuffixes.end(); ++it) {
+    //     insertWord(*it, root);
+    // }
 
     return 0;
 }
